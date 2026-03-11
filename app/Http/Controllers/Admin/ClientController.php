@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Laravel\Passport\Client;
+use Laravel\Passport\ClientRepository;
+
+class ClientController extends Controller
+{
+    public function __construct(private ClientRepository $clients) {}
+
+    public function index(): View
+    {
+        $clients = Client::orderByDesc('created_at')->paginate(20);
+
+        return view('admin.clients.index', compact('clients'));
+    }
+
+    public function create(): View
+    {
+        return view('admin.clients.create');
+    }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'name'         => ['required', 'string', 'max:255'],
+            'redirect_uri' => ['required', 'url'],
+            'confidential' => ['sometimes', 'boolean'],
+        ]);
+
+        $confidential = $data['confidential'] ?? true;
+
+        $this->clients->create(
+            userId: null,
+            name: $data['name'],
+            redirect: $data['redirect_uri'],
+            provider: null,
+            personalAccess: false,
+            password: false,
+            confidential: $confidential,
+        );
+
+        return redirect()->route('admin.clients.index')
+            ->with('status', 'Client created successfully.');
+    }
+
+    public function destroy(Client $client): RedirectResponse
+    {
+        $this->clients->delete($client);
+
+        return redirect()->route('admin.clients.index')
+            ->with('status', 'Client deleted.');
+    }
+}
