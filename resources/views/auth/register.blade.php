@@ -2,8 +2,8 @@
 
     {{-- Heading --}}
     <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900">Welcome to Rajin Auth</h1>
-        <p class="mt-2 text-sm text-gray-500">Create an account to get started.</p>
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Welcome to Rajin Auth</h1>
+        <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Create an account to get started.</p>
     </div>
 
     <form method="POST" action="{{ route('register') }}" class="space-y-5" novalidate>
@@ -14,7 +14,7 @@
             <div class="relative">
                 <x-text-input
                     id="name"
-                    class="peer block w-full px-4 py-[17px] rounded-xl border border-[#86868b] bg-white text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition placeholder-transparent {{ $errors->has('name') ? 'input-invalid' : '' }}"
+                    class="peer block w-full px-4 py-[17px] rounded-xl border border-[#86868b] bg-white dark:bg-gray-800 dark:border-gray-600 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition placeholder-transparent {{ $errors->has('name') ? 'input-invalid' : '' }}"
                     type="text"
                     name="name"
                     :value="old('name')"
@@ -23,7 +23,7 @@
                     autocomplete="name"
                 />
                 <label for="name"
-                    class="floating-label pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 bg-white px-1 text-sm transition-all duration-200
+                    class="floating-label pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 px-1 text-sm transition-all duration-200
                            peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-xs peer-focus:font-medium
                            peer-[:not(:placeholder-shown)]:-top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:font-medium">
                     Name
@@ -38,7 +38,7 @@
             <div class="relative">
                 <x-text-input
                     id="email"
-                    class="peer block w-full px-4 py-[17px] rounded-xl border border-[#86868b] bg-white text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition placeholder-transparent {{ $errors->has('email') ? 'input-invalid' : '' }}"
+                    class="peer block w-full px-4 py-[17px] rounded-xl border border-[#86868b] bg-white dark:bg-gray-800 dark:border-gray-600 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition placeholder-transparent {{ $errors->has('email') ? 'input-invalid' : '' }}"
                     type="email"
                     name="email"
                     :value="old('email')"
@@ -47,7 +47,7 @@
                     autocomplete="username"
                 />
                 <label for="email"
-                    class="floating-label pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 bg-white px-1 text-sm transition-all duration-200
+                    class="floating-label pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 px-1 text-sm transition-all duration-200
                            peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-xs peer-focus:font-medium
                            peer-[:not(:placeholder-shown)]:-top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:font-medium">
                     Email
@@ -62,7 +62,7 @@
             <div class="relative">
                 <x-text-input
                     id="password"
-                    class="peer block w-full px-4 py-[17px] rounded-xl border border-[#86868b] bg-white text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition placeholder-transparent {{ $errors->has('password') ? 'input-invalid' : '' }}"
+                    class="peer block w-full px-4 py-[17px] rounded-xl border border-[#86868b] bg-white dark:bg-gray-800 dark:border-gray-600 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition placeholder-transparent {{ $errors->has('password') ? 'input-invalid' : '' }}"
                     type="password"
                     name="password"
                     placeholder=" "
@@ -70,7 +70,7 @@
                     autocomplete="new-password"
                 />
                 <label for="password"
-                    class="floating-label pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 bg-white px-1 text-sm transition-all duration-200
+                    class="floating-label pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 px-1 text-sm transition-all duration-200
                            peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-xs peer-focus:font-medium
                            peer-[:not(:placeholder-shown)]:-top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:font-medium">
                     Password
@@ -96,7 +96,7 @@
             <div class="relative">
                 <x-text-input
                     id="password_confirmation"
-                    class="peer block w-full px-4 py-[17px] rounded-xl border border-[#86868b] bg-white text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition placeholder-transparent {{ $errors->has('password_confirmation') ? 'input-invalid' : '' }}"
+                    class="peer block w-full px-4 py-[17px] rounded-xl border border-[#86868b] bg-white dark:bg-gray-800 dark:border-gray-600 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition placeholder-transparent {{ $errors->has('password_confirmation') ? 'input-invalid' : '' }}"
                     type="password"
                     name="password_confirmation"
                     placeholder=" "
@@ -104,7 +104,7 @@
                     autocomplete="new-password"
                 />
                 <label for="password_confirmation"
-                    class="floating-label pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 bg-white px-1 text-sm transition-all duration-200
+                    class="floating-label pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 px-1 text-sm transition-all duration-200
                            peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-xs peer-focus:font-medium
                            peer-[:not(:placeholder-shown)]:-top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:font-medium">
                     Confirm Password
@@ -134,14 +134,14 @@
 
     {{-- Divider --}}
     <div class="my-6 flex items-center gap-3">
-        <div class="flex-1 h-px bg-gray-200"></div>
-        <span class="text-xs text-[#6e6e73] font-medium">OR</span>
-        <div class="flex-1 h-px bg-gray-200"></div>
+        <div class="flex-1 h-px bg-gray-200 dark:bg-gray-700"></div>
+        <span class="text-xs text-[#6e6e73] dark:text-gray-500 font-medium">OR</span>
+        <div class="flex-1 h-px bg-gray-200 dark:bg-gray-700"></div>
     </div>
 
     {{-- Google --}}
     <a href="{{ route('auth.social.redirect', 'google') }}"
-       class="w-full flex justify-center items-center gap-3 px-4 py-[17px] bg-white border border-gray-200 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition shadow-sm">
+       class="w-full flex justify-center items-center gap-3 px-4 py-[17px] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition shadow-sm">
         <svg class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
             <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -152,9 +152,9 @@
     </a>
 
     {{-- Login link --}}
-    <p class="mt-6 text-center text-sm text-gray-500">
+    <p class="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
         Already have an account?
-        <a href="{{ route('login') }}" class="font-medium text-indigo-600 hover:text-indigo-500 transition">
+        <a href="{{ route('login') }}" class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300 transition">
             Sign in
         </a>
     </p>
@@ -168,6 +168,11 @@
         #name.input-invalid, #email.input-invalid, #password.input-invalid, #password_confirmation.input-invalid { border-color: #ef4444 !important; }
         #name.input-invalid:focus, #email.input-invalid:focus, #password.input-invalid:focus, #password_confirmation.input-invalid:focus { border-color: #ef4444 !important; --tw-ring-color: rgba(239, 68, 68, 0.4); }
         .input-invalid ~ .floating-label { color: #ef4444 !important; }
+        .dark .floating-label { color: #9ca3af; }
+        .dark input:focus ~ .floating-label,
+        .dark input:not(:placeholder-shown) ~ .floating-label { color: #818cf8; }
+        .dark .eye-toggle { color: #9ca3af; }
+        .dark .eye-toggle:hover { color: #818cf8; }
     </style>
 
     <script>

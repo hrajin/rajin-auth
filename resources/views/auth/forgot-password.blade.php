@@ -2,8 +2,8 @@
 
     {{-- Heading --}}
     <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900">Reset Your Password</h1>
-        <p class="mt-2 text-sm text-gray-500">Enter the email associated with your account and we will send you password reset instructions.</p>
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Reset Your Password</h1>
+        <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Enter the email associated with your account and we will send you password reset instructions.</p>
     </div>
 
     {{-- Session Status --}}
@@ -17,7 +17,7 @@
             <div class="relative">
                 <x-text-input
                     id="email"
-                    class="peer block w-full px-4 py-[17px] rounded-xl border border-[#86868b] bg-white text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition placeholder-transparent {{ $errors->has('email') ? 'input-invalid' : '' }}"
+                    class="peer block w-full px-4 py-[17px] rounded-xl border border-[#86868b] bg-white dark:bg-gray-800 dark:border-gray-600 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition placeholder-transparent {{ $errors->has('email') ? 'input-invalid' : '' }}"
                     type="email"
                     name="email"
                     :value="old('email')"
@@ -26,7 +26,7 @@
                     autocomplete="email"
                 />
                 <label for="email"
-                    class="floating-label pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 bg-white px-1 text-sm transition-all duration-200
+                    class="floating-label pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 px-1 text-sm transition-all duration-200
                            peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-xs peer-focus:font-medium
                            peer-[:not(:placeholder-shown)]:-top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:font-medium">
                     Email
@@ -44,9 +44,9 @@
     </form>
 
     {{-- Back to login --}}
-    <p class="mt-6 text-center text-sm text-gray-500">
+    <p class="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
         Remember your password?
-        <a href="{{ route('login') }}" class="font-medium text-indigo-600 hover:text-indigo-500 transition">
+        <a href="{{ route('login') }}" class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300 transition">
             Sign in
         </a>
     </p>
@@ -58,6 +58,9 @@
         #email.input-invalid { border-color: #ef4444 !important; }
         #email.input-invalid:focus { border-color: #ef4444 !important; --tw-ring-color: rgba(239, 68, 68, 0.4); }
         #email.input-invalid ~ .floating-label { color: #ef4444 !important; }
+        .dark .floating-label { color: #9ca3af; }
+        .dark input:focus ~ .floating-label,
+        .dark input:not(:placeholder-shown) ~ .floating-label { color: #818cf8; }
     </style>
 
     <script>

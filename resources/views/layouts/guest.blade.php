@@ -11,13 +11,39 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
 
+        <!-- Dark mode init: must run before CSS renders to prevent flash -->
+        <script>
+            (function () {
+                const saved = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (saved === 'dark' || (!saved && prefersDark)) {
+                    document.documentElement.classList.add('dark');
+                }
+            })();
+        </script>
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen flex">
 
-            {{-- Left Panel: Branding --}}
+        <div class="min-h-screen flex dark:bg-gray-950 relative">
+
+            {{-- Theme toggle button --}}
+            <button id="theme-toggle"
+                onclick="toggleTheme()"
+                style="position: absolute; top: 1rem; right: 1rem; z-index: 50;"
+                class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center shadow-md hover:shadow-lg transition-colors"
+                aria-label="Toggle dark mode">
+                {{-- Sun icon — shown in dark mode --}}
+                <svg id="icon-sun" class="hidden w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                </svg>
+                {{-- Moon icon — shown in light mode --}}
+                <svg id="icon-moon" class="block w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
             <div class="hidden lg:flex lg:w-1/3 relative bg-indigo-600 flex-col justify-between p-12 overflow-hidden">
 
                 {{-- Background decorative circles --}}
@@ -42,7 +68,6 @@
 
                 {{-- Center content --}}
                 <div class="relative z-10">
-                    {{-- Abstract lock/shield illustration --}}
                     <div class="mb-10">
                         <div class="w-32 h-32 mx-auto relative">
                             <div class="absolute inset-0 bg-white opacity-10 rounded-3xl rotate-6"></div>
@@ -86,24 +111,43 @@
             </div>
 
             {{-- Right Panel: Form --}}
-            <div class="flex-1 flex flex-col justify-center items-center px-6 py-12 bg-white">
-                {{-- Mobile logo --}}
-                <div class="lg:hidden mb-8 w-full max-w-md">
+            <div class="flex-1 flex flex-col bg-white dark:bg-gray-900 transition-colors duration-200">
+                {{-- Mobile logo — pinned to top, same height as toggle button --}}
+                <div class="lg:hidden px-6 pt-4">
                     <a href="/" class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                             </svg>
                         </div>
-                        <span class="text-gray-900 font-semibold text-xl">{{ config('app.name', 'Rajin Auth') }}</span>
+                        <span class="text-gray-900 dark:text-white font-semibold text-xl">{{ config('app.name', 'Rajin Auth') }}</span>
                     </a>
                 </div>
 
-                <div class="w-full max-w-md">
-                    {{ $slot }}
+                {{-- Form — centered in remaining space --}}
+                <div class="flex-1 flex flex-col justify-center items-center px-6 py-12">
+                    <div class="w-full max-w-md">
+                        {{ $slot }}
+                    </div>
                 </div>
             </div>
 
         </div>
+
+        <script>
+            function toggleTheme() {
+                const isDark = document.documentElement.classList.toggle('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                document.getElementById('icon-sun').classList.toggle('hidden', !isDark);
+                document.getElementById('icon-moon').classList.toggle('hidden', isDark);
+            }
+
+            // Set correct icon on load
+            (function () {
+                const isDark = document.documentElement.classList.contains('dark');
+                document.getElementById('icon-sun').classList.toggle('hidden', !isDark);
+                document.getElementById('icon-moon').classList.toggle('hidden', isDark);
+            })();
+        </script>
     </body>
 </html>
