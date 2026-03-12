@@ -6,9 +6,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 
-// Apply oauth-token rate limiter to Passport's token endpoint
+// Apply device limit enforcement + rate limiting to Passport's token endpoint
 Route::post('/oauth/token', [AccessTokenController::class, 'issueToken'])
-    ->middleware('throttle:oauth-token')
+    ->middleware(['throttle:oauth-token', \App\Http\Middleware\EnforceDeviceLimit::class])
     ->name('passport.token');
 
 Route::get('/', function () {

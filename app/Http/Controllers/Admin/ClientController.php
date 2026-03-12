@@ -28,14 +28,16 @@ class ClientController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'name'         => ['required', 'string', 'max:255'],
-            'redirect_uri' => ['required', 'url'],
-            'confidential' => ['sometimes', 'boolean'],
+            'name'                  => ['required', 'string', 'max:255'],
+            'redirect_uri'          => ['required', 'url'],
+            'confidential'          => ['sometimes', 'boolean'],
+            'max_devices_per_user'  => ['nullable', 'integer', 'min:1', 'max:255'],
+            'device_limit_strategy' => ['sometimes', 'in:block,evict_oldest'],
         ]);
 
         $confidential = $data['confidential'] ?? true;
 
-        $this->clients->create(
+        $client = $this->clients->create(
             userId: null,
             name: $data['name'],
             redirect: $data['redirect_uri'],
@@ -44,6 +46,13 @@ class ClientController extends Controller
             password: false,
             confidential: $confidential,
         );
+
+        // Passport's ClientRepository doesn't expose max_devices_per_user,
+        // so we set it directly after creation
+        $client->forceFill([
+            'max_devices_per_user'  => $data['max_devices_per_user'] ?? null,
+            'device_limit_strategy' => $data['device_limit_strategy'] ?? 'block',
+        ])->save();
 
         return redirect()->route('admin.clients.index')
             ->with('status', 'Client created successfully.');
