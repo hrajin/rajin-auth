@@ -96,7 +96,6 @@
 
         emailInput.addEventListener('input', function () {
             document.getElementById('server-email-error')?.classList.add('hidden');
-            emailInput.classList.remove('input-invalid');
             if (emailInput.classList.contains('input-invalid')) validateEmail();
         });
 

@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Two\InvalidStateException;
 
 class SocialAuthController extends Controller
 {
@@ -18,7 +19,14 @@ class SocialAuthController extends Controller
 
     public function handleProviderCallback(string $provider): RedirectResponse
     {
-        $socialUser = Socialite::driver($provider)->user();
+        try {
+            $socialUser = Socialite::driver($provider)->user();
+        } catch (InvalidStateException) {
+            // State mismatch — usually caused by APP_URL not matching the actual
+            // URL, a session expiry, or the user hitting back/refresh mid-flow.
+            return redirect()->route('login')
+                ->withErrors(['email' => 'Google sign-in failed. Please try again.']);
+        }
 
         $socialAccount = SocialAccount::where('provider', $provider)
             ->where('provider_id', $socialUser->getId())
@@ -64,7 +72,6 @@ class SocialAuthController extends Controller
 
     private function redirectAfterLogin(): RedirectResponse
     {
-        // If there's a pending OAuth authorization request, resume it.
         if (session()->has('url.intended')) {
             return redirect()->intended();
         }

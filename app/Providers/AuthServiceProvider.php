@@ -21,8 +21,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Passport::tokensCan([
             'openid'         => 'OpenID Connect (basic identity)',
-            'profile'        => 'Access your name and avatar',
+            'profile'        => 'Access your name, avatar, bio, gender and date of birth',
             'email'          => 'Access your email address',
+            'phone'          => 'Access your phone number',
+            'address'        => 'Access your address',
             'offline_access' => 'Maintain access when not active (refresh tokens)',
         ]);
 

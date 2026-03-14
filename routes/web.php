@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\DiscoveryController;
 use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\ProfileController;
@@ -10,6 +11,12 @@ use Laravel\Passport\Http\Controllers\AccessTokenController;
 Route::post('/oauth/token', [AccessTokenController::class, 'issueToken'])
     ->middleware(['throttle:oauth-token', \App\Http\Middleware\EnforceDeviceLimit::class])
     ->name('passport.token');
+
+// OIDC Discovery — public, no auth, no CSRF
+Route::get('/.well-known/openid-configuration', [DiscoveryController::class, 'configuration'])
+    ->withoutMiddleware([\App\Http\Middleware\SecurityHeaders::class]);
+Route::get('/.well-known/jwks.json', [DiscoveryController::class, 'jwks'])
+    ->withoutMiddleware([\App\Http\Middleware\SecurityHeaders::class]);
 
 Route::get('/', function () {
     return view('welcome');

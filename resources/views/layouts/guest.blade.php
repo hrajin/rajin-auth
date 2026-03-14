@@ -149,5 +149,7 @@
                 document.getElementById('icon-moon').classList.toggle('hidden', isDark);
             })();
         </script>
+
+        <x-toast />
     </body>
 </html>

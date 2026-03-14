@@ -24,6 +24,14 @@
                         <x-input-error :messages="$errors->get('redirect_uri')" class="mt-2" />
                     </div>
 
+                    <!-- Logout URI -->
+                    <div class="mt-4">
+                        <x-input-label for="logout_uri" value="Logout URI (optional)" />
+                        <x-text-input id="logout_uri" name="logout_uri" type="url" class="mt-1 block w-full" :value="old('logout_uri')" placeholder="https://myapp.example.com/auth/logout" />
+                        <x-input-error :messages="$errors->get('logout_uri')" class="mt-2" />
+                        <p class="mt-1 text-xs text-gray-500">When a user triggers global logout, rajin-auth will POST to this URL so your app can destroy the local session. A <strong>logout secret</strong> will be generated — save it after creation.</p>
+                    </div>
+
                     <!-- Client Type -->
                     <div class="mt-4">
                         <x-input-label value="Client Type" />
